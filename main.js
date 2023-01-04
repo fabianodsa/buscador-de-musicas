@@ -5,11 +5,22 @@ const prevAndNextContainer = document.querySelector('#prev-and-next-container')
 
 const apiURL = `https://api.lyrics.ovh`
 
-// "event.preventDefault previne que o form seja enviado, pois vamos trabalhar com os dados"
+const insertSongsIntoPage = songsInfo => {
+  
+    
+    songsContainer.innerHTML = songsInfo.data.map()
+}
+
+const fetchSongs = async term => {
+    const response = await fetch(`${apiURL}/suggest/${term}`)
+    const data = await response.json()
+
+    insertSongsIntoPage(data)
+}
+
 form.addEventListener('submit', event => {
     event.preventDefault()
-    // função para receber os dados do input
-    // o método trim retorna sem os espaços em branco
+
     const searchTerm = searchInput.value.trim()
 
 if (!searchTerm) {
@@ -17,5 +28,5 @@ if (!searchTerm) {
     return
 }
 
-   fetchsongs   
+   fetchSongs(searchTerm)   
 })
